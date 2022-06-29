@@ -5,7 +5,8 @@ const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
 };
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 // analisar solicitações de content-type - application/json
 app.use(express.json());
 // analisar solicitações de content-type - application/x-www-form-urlencoded
@@ -28,17 +29,17 @@ db.mongoose
     process.exit();
   });
 
-// rota simples
+// rotas
 app.get("/", (req, res) => {
   res.json({ message: "Teste API Express." });
 });
-// rotas
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
+
 // set porta, escuta as requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`O servidor está rodando na porta ${PORT}.`);
 });
 
 function initial() {
